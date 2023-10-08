@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div id="full-screen" class="flex">
+        <div id="calculator-screen">
+            <div id="output" class="common">
+                <span id="output-show">0</span>
+            </div>
+
+            <div id="ac" class="common flex" onclick="clearAC()">
+                <span>AC</span>
+            </div>
+
+            <div id="number-container">
+                <div class="common flex" onclick="display(9)">9</div>
+                <div class="common flex" onclick="display(8)">8</div>
+                <div class="common flex" onclick="display(7)">7</div>
+                <div class="common flex" onclick="display(4)">4</div>
+                <div class="common flex" onclick="display(5)">5</div>
+                <div class="common flex" onclick="display(6)">6</div>
+                <div class="common flex" onclick="display(1)">1</div>
+                <div class="common flex" onclick="display(2)">2</div>
+                <div class="common flex" onclick="display(3)">3</div>
+                <div class="common flex" onclick="display('.')">.</div>
+                <div class="common flex" onclick="display(0)">0</div>
+                <div class="common flex" onclick="outputDisplay()">=</div>
+            </div>
+
+            <div id="operator-container">
+                <div class="common flex" onclick="display('+')">+</div>
+                <div class="common flex"  onclick="display('-')">-</div>
+                <div class="common flex"  onclick="display('/')">&divide;</div>
+                <div class="common flex"  onclick="display('*')">x</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arrow function for displaying evaluated output using eval function of javascript
+        let outputDisplay = () => {
+            let output_show = document.getElementById('output-show');
+            output_show.innerText = eval(output_show.innerText);
+        }
+
+
+        // Normal function for checking if point is present before an operator in the equation to be evaluated
+        function isPointPresent(outputVal,n){
+            if (n==0)
+                return false;
+            
+            let i = n-1;
+            let flag = false;
+            while (i>=0 && outputVal[i] != '*' && outputVal[i] != '-' && outputVal[i] != '+' && outputVal[i] != '/'){
+                if (outputVal[i]=='.'){
+                    flag = true;
+                    break;
+                }
+                i -= 1;
+            }
+
+            return flag;
+        }
+
+        // Funtion for displaying the equation in the output box
+        // It validates the equation for example checking that 2 operators does occur side by side (e.g. 3+5-+) and many more
+        function display(val){
+            let outputVal = document.getElementById("output-show").innerText;
+            let n = outputVal.length;
+
+            if (n>30)
+                outputVal = "Input Limit Exceeded";
+
+            else if (typeof(val)=="number"){
+                outputVal += val;
+            }
+
+            
+            else if (val=='.'){
+                let n = outputVal.length;
+                let lastIndexElement = outputVal[n-1];
+                let check = isPointPresent(outputVal,n);
+                if (!check)
+                    outputVal += val;
+            }
+
+            
+            else{
+                
+                if (n>0){
+                    let lastIndexElement = outputVal[n-1];
+
+                    if ((lastIndexElement!='.') & lastIndexElement=='*' | lastIndexElement=='+' | lastIndexElement=='-' | lastIndexElement=='/')
+                        outputVal = outputVal.slice(0,n-1)+val;
+                    
+                    else
+                        outputVal += val;
+                }
+            }
+
+            document.getElementById("output-show").innerText = outputVal;
+            
+        }
+
+        // This function clears the output box
+        function clearAC(){
+            document.getElementById("output-show").innerText = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Survey Form</title>
+</head>
+<body>
+    <div id="full-screen" class="flex">
+        <div id="outer-container">
+            <h1>Customer Survey Form</h1>
+        <div id="form-container">
+            
+            <form name="survey-form" id="survey-form">
+                <div class="form-value">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" required> 
+                </div>
+                
+                <div class="form-value">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+                
+                <div class="form-value">
+                    <label for="dob">Date Of Birth</label>
+                    <input type="date" id="dob" name="dob" max="2008-12-31" required>
+                </div>
+                
+                <div class="form-value">
+                    <label for="country">Country</label>
+                    <select name="country" id="country"  name="country" required>
+                        <option value="India">India</option>
+                        <option value="United States">United States</option>
+                        <option value="China">China</option>
+                        <option value="Russia">Russia</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Japan">Japan</option>
+                        <option value="France">France</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Nepal">Nepal</option>
+                    </select>
+                </div>
+
+                <div class="form-value">
+                    <label>Gender</label>
+                    <div class="gender-value">
+                        <input type="radio" name="gender" value="Male" id="male" required>
+                        <label for="male">Male</label>
+                        <input type="radio" name="gender" value="Female" id="female">
+                        <label for="female">Female</label>
+                        <input type="radio" name="gender" value="Prefer Not To Say" id="not-say">
+                        <label for="not-say">Prefer Not To Say</label>
+                    </div>
+                </div>
+
+                <div class="form-value">
+                    <label for="profession">Profession</label>
+                    <input type="text" id="profession" name="profession" required>
+                </div>
+
+                <div class="form-value">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form-value">
+                    <label for="mob">Mobile Number</label>
+                    <input type="number" name="mob" id="mob" min="1111111111" max="9999999999" required>
+                </div>
+
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+        </div>
+        <div id="popup-container">
+            <div class="popup-screen">
+                <h2>Thank You For Your Time</h2>
+                <p>First Name : <span id="firstname-popup"></span></p>
+                <p>Last Name : <span id="lastname-popup"></span></p>
+                <p>Date Of Birth : <span id="dob-popup"></span></p>
+                <p>Country : <span id="country-popup"></span></p>
+                <p>Gender : <span id="gender-popup"></span></p>
+                <p>Profession : <span id="profession-popup"></span></p>
+                <p>Email : <span id="email-popup"></span></p>
+                <p>Mobile Number : <span id="mob-popup"></span></p>
+
+                <button onclick="functionReset()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let survey_form_variable = document.getElementById('survey-form');
+        let popup_container = document.getElementById('popup-container');
+        let outer_container = document.getElementById('outer-container');
+        
+        survey_form_variable.addEventListener('submit', function(event){
+            console.log("function call");
+
+            event.preventDefault();
+
+            let form_data = document.forms["survey-form"];
+            document.getElementById('firstname-popup').innerText = form_data["firstname"].value;
+            document.getElementById('lastname-popup').innerText = form_data["lastname"].value;
+            document.getElementById('dob-popup').innerText = form_data["dob"].value;
+            document.getElementById('country-popup').innerText = form_data["country"].value;
+            document.getElementById('gender-popup').innerText = form_data["gender"].value;
+            document.getElementById('profession-popup').innerText = form_data["profession"].value;
+            document.getElementById('email-popup').innerText = form_data["email"].value;
+            document.getElementById('mob-popup').innerText = form_data["mob"].value;
+            
+            popup_container.style.display = 'block';
+            outer_container.style.opacity = '0.3';
+
+            console.log("successful submit");
+            
+        })
+
+        function functionReset(){
+            popup_container.style.display = 'none';
+            outer_container.style.opacity = '1';
+            document.getElementById("survey-form").reset();
+        }
+
+    </script>
+</body>
+</html>

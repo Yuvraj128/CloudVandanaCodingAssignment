@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#full-screen{
+    background-color: blue;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+}
+
+/* Outer Container Styling Starts */
+
+#form-container{
+    padding: 10px;
+    margin: 7px;
+    width: 350px;
+    background-color: white;
+
+}
+
+.form-value > label{
+    display: block;
+}
+
+.form-value > input[type='text'], .form-value > input[type='number'], .form-value > input[type='email']{
+    width: 70%;
+    padding: 4px;
+}
+
+.form-value > input, select, .gender-value{
+    margin: 4px 0 12px 0;
+}
+
+/* Outer Container Styling Ends */
+
+/* Pop Up Container Styling Starts */
+
+#popup-container{
+    display: none;
+    box-shadow: 1px 1px 7px;
+    position: absolute;
+    z-index: 1;
+    padding: 20px;
+    background-color: white;
+    
+}
+
+.popup-screen span{
+    font-weight: 600;
+}
+
+.popup-screen > p{
+    margin: 4px;
+}
+
+/* Pop Container Styling Ends */
+
+/* Specific Tag And Resuable Class Styling Starts */
+
+h1,h2{
+    color: white;
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+button{
+    background-color: blue;
+    color: white;
+    padding: 7px 10px;
+    border: none;
+    cursor: pointer;
+    margin: 7px 0;
+    width: auto;
+}
+
+button:hover{
+    color: rgba(255,255,255,0.8);
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Specific Tag And Resuable Class Styling Ends */
